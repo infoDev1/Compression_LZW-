@@ -10,31 +10,49 @@
 #define END_CODE 257
 #define CLEAR_CODE 256
 
-// Structure pour une entrée dans le dictionnaire LZW.
-typedef struct lzw_dict {
-    char *entry;
+/**
+ * @brief Structure représentant une case d'un dictionnaire
+ * 
+ */
+typedef struct _dict {
+    char * word;
     int code;
-    struct lzw_dict *next;
-} lzw_dict;
+    struct _dict *next;
+} dict;
 
 /**
- * Insère une nouvelle entrée dans le dictionnaire.
+ * @brief Insère une nouvelle entrée dans le dictionnaire.
+ * 
+ * @param dict Le dictionnaire dont lequel on effectue l'insertion
+ * @param word La chaîne de caractère à insérer 
+ * @param code Le code la chaîne
  */
-void lzw_dict_insert(lzw_dict *dict, char *entry, int code);
+void insert(dict *dict, char *word, int code);
 
 /**
- * Cherche une entrée dans le dictionnaire et renvoie son code.
+ * @brief Cherche une entrée dans le dictionnaire et renvoie son code.
+ * 
+ * @param dict Le dictionnaire dont lequel on effectue la recherche
+ * @param next_code prochain code
+ * @param word Le mot à rechercher
+ * @return int Le code du mot s'il est présent dans le dictionnaire, -1 sinon
  */
-int lzw_dict_search(lzw_dict *dict, int next_code, char *entry);
+int find(dict *dict, int next_code, char *word);
 
 /**
- * Encode un fichier d'entrée en utilisant l'algorithme LZW et écrit le résultat dans un fichier de sortie.
+ * @brief Encode un fichier d'entrée en utilisant l'algorithme LZW et écrit le résultat dans un fichier de sortie.
+ * 
+ * @param input Le fichier d'input (lecture)
+ * @param output Le fichier d'output (ecriture)
  */
-void lzw_encode(FILE *input, FILE *output);
+void encode(FILE *input, FILE *output);
 
 /**
- * Décode un fichier d'entrée encodé avec l'algorithme LZW et écrit le résultat dans un fichier de sortie.
+ * @brief Décode un fichier d'entrée encodé avec l'algorithme LZW et écrit le résultat dans un fichier de sortie.
+ * 
+ * @param input Le fichier d'input (lecture)
+ * @param output Le fichier d'output (ecriture)
  */
-void lzw_decode(FILE *input, FILE *output);
+void decode(FILE *input, FILE *output);
 
-#endif // LZW_H
+#endif 

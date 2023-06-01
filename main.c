@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "lzw.h"
 
 int main(int argc, char *argv[]) {
@@ -23,10 +26,10 @@ int main(int argc, char *argv[]) {
 
     switch (argv[1][0]) {
         case 'e':
-            lzw_encode(input, output);
+            encode(input, output);
             break;
         case 'd':
-            lzw_decode(input, output);
+            decode(input, output);
             break;
         default:
             fprintf(stderr, "Invalid operation\n");
